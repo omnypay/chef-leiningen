@@ -1,3 +1,4 @@
+name             "leiningen"
 maintainer       "Robert J. Berger"
 maintainer_email "rberger@ibd.com"
 license          "Apache 2.0"
