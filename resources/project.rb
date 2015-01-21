@@ -7,3 +7,4 @@ attribute :uberjar_name     ,:kind_of => String
 attribute :source_dir       ,:kind_of => String
 attribute :deploy_user      ,:kind_of => String
 attribute :pre_build_cmd    ,:kind_of => String
+attribute :home             ,:kind_of => String

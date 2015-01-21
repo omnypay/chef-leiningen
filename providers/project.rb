@@ -5,7 +5,7 @@ action :build do
       :aws_secret_access_key => new_resource.s3_passphrase
     }
     
-    template "/home/#{new_resource.deploy_user}/.lein/init.clj" do
+    template File.expand_path "~#{new_resource.deploy_user}/.lein/init.clj" do
       owner  new_resource.deploy_user
       group  new_resource.deploy_user
       source "lein_init.clj.erb"
@@ -19,7 +19,7 @@ action :build do
       user    new_resource.deploy_user
       group   new_resource.deploy_user
       cwd     new_resource.source_dir
-      environment({"HOME" => "/home/runa-deploy"})
+      environment({"HOME" => FIle.expand_path "~#{new_resource.deploy_user}"})
       command new_resource.pre_build_cmd
     end
   end
@@ -28,7 +28,7 @@ action :build do
     user    new_resource.deploy_user
     group   new_resource.deploy_user
     cwd     new_resource.source_dir
-    environment({"HOME" => "/home/#{new_resource.deploy_user}",
+    environment({"HOME" => File.expand_path "~#{new_resource.deploy_user}",
                   "ARCHIVA_USERNAME" => new_resource.s3_username,
                   "ARCHIVA_PASSPHRASE" => new_resource.s3_passphrase})
     command "lein clean; lein uberjar"
