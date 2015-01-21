@@ -3,6 +3,7 @@
 # Recipe:: default
 #
 # Copyright 2010, Runa Inc.
+# Copyright 2015, Robert J. Berger
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,8 +18,8 @@
 # limitations under the License.
 #
 
-remote_file "/usr/local/bin/lein" do
-  source "https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein"
+remote_file node[:leiningen]{:bin_dir] do
+  source node[:leiningen][:url]
   mode "755"
   owner "root"
   group "root"
@@ -27,8 +28,8 @@ end
 
 execute "install_leiningen" do
   command "lein version"
-  user   node[:lein][:user]
-  group  node[:lein][:group]
-  environment ({"HOME" => node[:lein][:home], "HTTP_CLIENT" => 'curl --insecure -f -L -o'})
+  user   node[:leiningen][:user]
+  group  node[:leiningen][:group]
+  environment (node[:leiningen][:run_environment])
 end
 

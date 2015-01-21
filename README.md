@@ -6,14 +6,28 @@ Forked from the outdated repo https://github.com/runa-labs/chef-leiningen (see h
 
 # REQUIREMENTS:
 
-none
+Java
 
 # ATTRIBUTES:
 
-none
+* :leiningen
+  * `:bin_dir`         Where to install the lein executable
+                       Default: `"/usr/local/bin"`
+  * `:user`            The unix user to own the executable
+                       Default: `"root"`
+  * `:group`           The unix group to own the executable
+                       Default: `"root"`
+  * `:run_environment` Shell environment to run the intial lein command that will trigger the install
+                       Default: `{"HOME" => node[:leiningen][:bin_dir], "HTTP_CLIENT" => 'curl --insecure -f -L -o'}`
 
 # USAGE:
 
+## Install Leiningen
+
+The default recipe will install leiningen on the target system in `node[:leiningen][:bind_dir]. 
+
+
+## 
 ```
    leiningen_project "Deploy Something" do
       action            [:build]
