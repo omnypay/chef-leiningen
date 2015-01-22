@@ -18,7 +18,7 @@
 # limitations under the License.
 #
 
-remote_file node[:leiningen]{:bin_dir] do
+remote_file "#{node[:leiningen][:bin_dir]}/lein" do
   source node[:leiningen][:url]
   mode "755"
   owner "root"
